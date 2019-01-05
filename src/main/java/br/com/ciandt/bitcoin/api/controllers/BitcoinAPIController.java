@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +22,7 @@ import br.com.ciandt.bitcoin.api.dtos.LucroDTO;
 import br.com.ciandt.bitcoin.api.dtos.ValorInvestidoDTO;
 import br.com.ciandt.bitcoin.api.dtos.enums.TipoTransacaoBitcon;
 import br.com.ciandt.bitcoin.api.responses.ApiResponse;
+import br.com.ciandt.bitcoin.api.services.CotacaoDiariaBitcoinService;
 
 
 /**
@@ -33,6 +34,9 @@ import br.com.ciandt.bitcoin.api.responses.ApiResponse;
 @RestController
 @RequestMapping("/api/")
 public class BitcoinAPIController {
+	
+	@Autowired
+	private CotacaoDiariaBitcoinService cotacaoDiariaBitcoinService;
 	
 	/**
 	 * Retorna o valor investido desde o momento do cadastro da carteira.
@@ -82,20 +86,8 @@ public class BitcoinAPIController {
 	@GetMapping(value = "/cotacao/historico")
 	public ResponseEntity<ApiResponse<List>> historicoCotacaoBitcoinDia() {
 		
-		List<HistoricoCotacaoBitconDTO> historicoData = new ArrayList<HistoricoCotacaoBitconDTO>();
+		List<HistoricoCotacaoBitconDTO> historicoData = cotacaoDiariaBitcoinService.listaHistoricoCotacaoBitcoinDia(LocalDate.now());
 		
-		HistoricoCotacaoBitconDTO hist1 = GenericBuilder.of(HistoricoCotacaoBitconDTO::new)
-				.with(HistoricoCotacaoBitconDTO::setHoraObtidaCotacao, LocalTime.now())
-				.with(HistoricoCotacaoBitconDTO::setValorCotacao, new BigDecimal(24567.55).setScale(2, RoundingMode.HALF_UP))
-				.build();
-		
-		HistoricoCotacaoBitconDTO hist2 = GenericBuilder.of(HistoricoCotacaoBitconDTO::new)
-				.with(HistoricoCotacaoBitconDTO::setHoraObtidaCotacao, LocalTime.now().plusHours(4))
-				.with(HistoricoCotacaoBitconDTO::setValorCotacao, new BigDecimal(25800.66).setScale(2, RoundingMode.HALF_UP))
-				.build();
-		
-		historicoData.add(hist1);
-		historicoData.add(hist2);
 		
 		ApiResponse<List> response = GenericBuilder.of(ApiResponse<List>::new)
 				.with(ApiResponse::setData, historicoData).build();

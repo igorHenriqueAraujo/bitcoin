@@ -53,8 +53,12 @@ public class LucroDTO implements Serializable {
 	public void setDataCadastroCarteira(LocalDate dataCadastroCarteira) {
 		this.dataCadastroCarteira = dataCadastroCarteira;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "LucroDTO [lucroObtido=" + lucroObtido + ", carteira=" + carteira + ", dataCadastroCarteira="
+				+ dataCadastroCarteira + "]";
+	}
 	
 
 }

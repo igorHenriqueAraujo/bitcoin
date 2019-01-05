@@ -88,4 +88,13 @@ public class HistoricoTransacoesDTO implements Serializable {
 		this.carteira = carteira;
 	}
 
+	@Override
+	public String toString() {
+		return "HistoricoTransacoesDTO [valorReal=" + valorReal + ", valorBitcoin=" + valorBitcoin
+				+ ", cotacaoTransacao=" + cotacaoTransacao + ", dataHoraTransacao=" + dataHoraTransacao
+				+ ", tipoTransacao=" + tipoTransacao + ", carteira=" + carteira + "]";
+	}
+	
+	
+
 }

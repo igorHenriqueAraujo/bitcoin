@@ -42,8 +42,12 @@ public class HistoricoCotacaoBitconDTO implements Serializable {
 	public void setHoraObtidaCotacao(LocalTime horaObtidaCotacao) {
 		this.horaObtidaCotacao = horaObtidaCotacao;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "HistoricoCotacaoBitconDTO [valorCotacao=" + valorCotacao + ", horaObtidaCotacao=" + horaObtidaCotacao
+				+ "]";
+	}
 	
 
 }

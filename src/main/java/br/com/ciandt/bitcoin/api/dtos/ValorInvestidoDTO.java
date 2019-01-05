@@ -53,6 +53,13 @@ public class ValorInvestidoDTO implements Serializable {
 	public void setDataCadastroCarteira(LocalDate dataCadastroCarteira) {
 		this.dataCadastroCarteira = dataCadastroCarteira;
 	}
+
+	@Override
+	public String toString() {
+		return "ValorInvestidoDTO [valorInvestido=" + valorInvestido + ", carteira=" + carteira
+				+ ", dataCadastroCarteira=" + dataCadastroCarteira + "]";
+	}
+	
 	
 
 }

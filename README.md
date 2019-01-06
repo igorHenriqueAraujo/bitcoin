@@ -1,3 +1,3 @@
 [![Build Status](https://travis-ci.org/igorHenriqueAraujo/bitcoin.svg?branch=master)](https://travis-ci.org/igorHenriqueAraujo/bitcoin)
-# bitcoin
+# bitcoin-api
 Desafio Bitcoin

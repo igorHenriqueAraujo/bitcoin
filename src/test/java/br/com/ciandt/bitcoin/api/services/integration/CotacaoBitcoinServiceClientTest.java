@@ -26,10 +26,10 @@ public class CotacaoBitcoinServiceClientTest {
 	private RestTemplate restTemplate;
 	
 	@InjectMocks
-	private CotacaoBitcoinServiceClient client = new CotacaoBitcoinServiceClient();
+	private CotacaoBitcoinServiceClient client;
 	
 	@Test
-	public void aoChamarServicoDeCotacao_deveRetornarValorCotacaoBitcoinEmReal() {
+	public void getCotacaoBitcoinTest() {
 		
 		BigDecimal valor = new BigDecimal(14221.61).setScale(2, RoundingMode.UP);
 		

@@ -30,7 +30,7 @@ public class CotacaoDiariaBitcoinSchedulerTest {
 	private CotacaoDiariaBitcoinScheduler cotacaoDiariaBitcoinScheduler;
 	
 	@Test
-	public void quandoExecutadoRecuperacaoDeCotacao_entaoChamarClientERetornarValor() {
+	public void getCotacaoTest() {
 		
 		BigDecimal valor = new BigDecimal(14221.61).setScale(2, RoundingMode.UP);
 		
@@ -42,7 +42,7 @@ public class CotacaoDiariaBitcoinSchedulerTest {
 	}
 	
 	@Test
-	public void quandoExecutadoSave_entaoSalvarACotacaoInformadaERetornarEntidadeCompleta() {
+	public void saveTest() {
 		BigDecimal valor = new BigDecimal(14221.61).setScale(2, RoundingMode.UP);
 		
 		CotacaoBitcoinEntity entity = new CotacaoBitcoinEntity();

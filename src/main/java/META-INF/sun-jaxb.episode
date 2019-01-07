@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bindings xmlns="http://java.sun.com/xml/ns/jaxb" if-exists="true" version="2.1">
+  <!--
+
+Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.11 
+Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
+Gerado em: 2019.01.07 às 02:29:28 PM BRST 
+
+  -->
+  <bindings xmlns:tns="http://www.ciandt.com.br/xml/carteirabitcoin" if-exists="true" scd="x-schema::tns">
+    <schemaBindings map="false">
+      <package name="br.com.ciandt.bitcoin.historicotransacoes.soapapi"/>
+    </schemaBindings>
+    <bindings if-exists="true" scd="tns:HistoricoTransacaoRequest">
+      <class ref="br.com.ciandt.bitcoin.historicotransacoes.soapapi.HistoricoTransacaoRequest"/>
+    </bindings>
+    <bindings if-exists="true" scd="tns:HistoricoTransacaoResponse">
+      <class ref="br.com.ciandt.bitcoin.historicotransacoes.soapapi.HistoricoTransacaoResponse"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:Transacao">
+      <class ref="br.com.ciandt.bitcoin.historicotransacoes.soapapi.Transacao"/>
+    </bindings>
+    <bindings if-exists="true" scd="~tns:TipoTransacao">
+      <typesafeEnumClass ref="br.com.ciandt.bitcoin.historicotransacoes.soapapi.TipoTransacao"/>
+    </bindings>
+  </bindings>
+</bindings>

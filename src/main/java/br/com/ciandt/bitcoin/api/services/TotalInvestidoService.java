@@ -9,9 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.ciandt.bitcoin.api.dtos.HistoricoTransacoesDTO;
 import br.com.ciandt.bitcoin.api.dtos.enums.TipoTransacaoBitcoin;
-import br.com.ciandt.bitcoin.api.dtos.integration.HistoricoTransacaoRecenteDTO;
-import br.com.ciandt.bitcoin.api.responses.integration.HistoricoTransacoesRecenteResponse;
+import br.com.ciandt.bitcoin.api.dtos.integration.HistoricoTransacaoIntegrationDTO;
+import br.com.ciandt.bitcoin.api.responses.integration.HistoricoTransacoesIntegrationResponse;
+import br.com.ciandt.bitcoin.api.services.integration.HistoricoTransacoesAntigasServiceClient;
 import br.com.ciandt.bitcoin.api.services.integration.HistoricoTransacoesRecentesServiceClient;
 
 /**
@@ -27,6 +29,9 @@ public class TotalInvestidoService {
 	@Autowired
 	private HistoricoTransacoesRecentesServiceClient historicoTransacoesRecentesServiceClient;
 	
+	@Autowired
+	private HistoricoTransacoesAntigasServiceClient historicoTransacoesAntigasServiceClient;
+	
 	/**
 	 * Recupera o valor do total investido (compra).
 	 * @param carteira
@@ -35,13 +40,20 @@ public class TotalInvestidoService {
 	public BigDecimal getTotalInvestido(String carteira) {
 		
 		//recupera historico recente
-		List<HistoricoTransacaoRecenteDTO> historico = recuperaHistoricoTransacoesRecentes(carteira);
+		List<HistoricoTransacaoIntegrationDTO> historicoRecente = recuperaHistoricoTransacoesRecentes(carteira);
 		//filtra para obter apenas transações de compra
-		List<HistoricoTransacaoRecenteDTO> apenasCompra = historico.stream().filter(hist -> TipoTransacaoBitcoin.COMPRA.equals(hist.getTipoTransacao())).collect(Collectors.toList());
+		List<HistoricoTransacaoIntegrationDTO> apenasCompraRecente = historicoRecente.stream().filter(hist -> TipoTransacaoBitcoin.COMPRA.equals(hist.getTipoTransacao())).collect(Collectors.toList());
 		//soma os valores contidos na lista
-		BigDecimal totalInvestido = apenasCompra.stream().map((compra) -> compra.getValorReal()).reduce((compra, outra) -> compra.add(outra)).get();
+		BigDecimal totalInvestidoRecente = apenasCompraRecente.stream().map((compra) -> compra.getValorReal()).reduce((compra, outra) -> compra.add(outra)).get();
 		
-		return totalInvestido;
+		//recupera historico antigo
+		List<HistoricoTransacoesDTO> historicoAntigo = historicoTransacoesAntigasServiceClient.getHistoricoTransacoesAntigas(carteira);
+		//filtra para obter apenas transações de compra
+		List<HistoricoTransacoesDTO> apenasCompraAntigo = historicoAntigo.stream().filter(hist -> TipoTransacaoBitcoin.COMPRA.equals(hist.getTipoTransacao())).collect(Collectors.toList());
+		//soma os valores contidos na lista
+		BigDecimal totalInvestidoAntigo = apenasCompraAntigo.stream().map((compra) -> compra.getValorReal()).reduce((compra, outra) -> compra.add(outra)).get();
+		
+		return totalInvestidoRecente.add(totalInvestidoAntigo);
 	}
 	
 	/**
@@ -49,8 +61,8 @@ public class TotalInvestidoService {
 	 * @param carteira
 	 * @return
 	 */
-	private List<HistoricoTransacaoRecenteDTO> recuperaHistoricoTransacoesRecentes(String carteira) {
-		HistoricoTransacoesRecenteResponse response = historicoTransacoesRecentesServiceClient.getHistoricoTransacoesRecentes(carteira);
+	private List<HistoricoTransacaoIntegrationDTO> recuperaHistoricoTransacoesRecentes(String carteira) {
+		HistoricoTransacoesIntegrationResponse response = historicoTransacoesRecentesServiceClient.getHistoricoTransacoesRecentes(carteira);
 		log.info(response.toString());
 		return response.getHistorico();
 	}

@@ -10,7 +10,7 @@ import br.com.ciandt.bitcoin.api.dtos.enums.TipoTransacaoBitcoin;
  * @author igorha
  *
  */
-public class HistoricoTransacaoRecenteDTO {
+public class HistoricoTransacaoIntegrationDTO {
 	
 	private BigDecimal valorReal;
 	private BigDecimal valorBitcoin;

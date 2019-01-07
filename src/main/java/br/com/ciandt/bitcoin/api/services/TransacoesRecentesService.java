@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.ciandt.bitcoin.api.builder.GenericBuilder;
 import br.com.ciandt.bitcoin.api.dtos.HistoricoTransacoesDTO;
-import br.com.ciandt.bitcoin.api.dtos.integration.HistoricoTransacaoRecenteDTO;
-import br.com.ciandt.bitcoin.api.responses.integration.HistoricoTransacoesRecenteResponse;
+import br.com.ciandt.bitcoin.api.dtos.integration.HistoricoTransacaoIntegrationDTO;
+import br.com.ciandt.bitcoin.api.responses.integration.HistoricoTransacoesIntegrationResponse;
 import br.com.ciandt.bitcoin.api.services.integration.HistoricoTransacoesRecentesServiceClient;
 
 /**
@@ -41,9 +41,9 @@ public class TransacoesRecentesService {
 		List<HistoricoTransacoesDTO> retorno = new ArrayList<HistoricoTransacoesDTO>();
 		
 		//recupera historico recente
-		List<HistoricoTransacaoRecenteDTO> historico = recuperaHistoricoTransacoesRecentes(carteira);
+		List<HistoricoTransacaoIntegrationDTO> historico = recuperaHistoricoTransacoesRecentes(carteira);
 		//ordena a lista por data da mais recente a mais antiga
-		List<HistoricoTransacaoRecenteDTO> ultimas = historico.stream().sorted(Comparator.comparing(HistoricoTransacaoRecenteDTO::getDataHoraTransacao).reversed()).collect(Collectors.toList()).subList(0, NUM_TRANSACOES_RETORNO);
+		List<HistoricoTransacaoIntegrationDTO> ultimas = historico.stream().sorted(Comparator.comparing(HistoricoTransacaoIntegrationDTO::getDataHoraTransacao).reversed()).collect(Collectors.toList()).subList(0, NUM_TRANSACOES_RETORNO);
 		//constroi a lista de retorno da API
 		ultimas.stream().forEach(ultima -> retorno.add(buildApiDto(ultima, carteira)));
 		
@@ -55,8 +55,8 @@ public class TransacoesRecentesService {
 	 * @param carteira
 	 * @return
 	 */
-	private List<HistoricoTransacaoRecenteDTO> recuperaHistoricoTransacoesRecentes(String carteira) {
-		HistoricoTransacoesRecenteResponse response = historicoTransacoesRecentesServiceClient.getHistoricoTransacoesRecentes(carteira);
+	public List<HistoricoTransacaoIntegrationDTO> recuperaHistoricoTransacoesRecentes(String carteira) {
+		HistoricoTransacoesIntegrationResponse response = historicoTransacoesRecentesServiceClient.getHistoricoTransacoesRecentes(carteira);
 		log.info(response.toString());
 		return response.getHistorico();
 	}
@@ -67,7 +67,7 @@ public class TransacoesRecentesService {
 	 * @param carteira
 	 * @return
 	 */
-	private HistoricoTransacoesDTO buildApiDto(HistoricoTransacaoRecenteDTO historico, String carteira) {
+	private HistoricoTransacoesDTO buildApiDto(HistoricoTransacaoIntegrationDTO historico, String carteira) {
 		return GenericBuilder.of(HistoricoTransacoesDTO::new)
 				.with(HistoricoTransacoesDTO::setDataHoraTransacao, historico.getDataHoraTransacao())
 				.with(HistoricoTransacoesDTO::setCotacaoTransacao, historico.getCotacaoTransacao())

@@ -13,5 +13,10 @@
     "name": "historico.transacoes.recentes.api.base.url",
     "type": "java.lang.String",
     "description": "URL Base para comunicacao com o servico de historico de transacoes"
+  },
+  {
+    "name": "api.historico.transacoes.soap.url.conexao",
+    "type": "java.lang.String",
+    "description": "A description for 'api.historico.transacoes.soap.url.conexao'"
   }
 ]}

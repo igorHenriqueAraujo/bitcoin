@@ -3,7 +3,6 @@ package br.com.ciandt.bitcoin.api.controllers;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,7 @@ import br.com.ciandt.bitcoin.api.dtos.LucroDTO;
 import br.com.ciandt.bitcoin.api.dtos.ValorInvestidoDTO;
 import br.com.ciandt.bitcoin.api.responses.ApiResponse;
 import br.com.ciandt.bitcoin.api.services.CotacaoDiariaBitcoinService;
+import br.com.ciandt.bitcoin.api.services.LucroObtidoService;
 import br.com.ciandt.bitcoin.api.services.TotalInvestidoService;
 import br.com.ciandt.bitcoin.api.services.TransacoesRecentesService;
 
@@ -42,6 +42,9 @@ public class BitcoinAPIController {
 	
 	@Autowired
 	private TransacoesRecentesService transacoesRecentesService;
+	
+	@Autowired
+	private LucroObtidoService lucroObtidoService;
 	
 	/**
 	 * Retorna o valor investido desde o momento do cadastro da carteira.
@@ -73,9 +76,8 @@ public class BitcoinAPIController {
 	public ResponseEntity<ApiResponse<LucroDTO>> lucro(@PathVariable String carteira) {
 		
 		LucroDTO data  = GenericBuilder.of(LucroDTO::new)
-	            .with(LucroDTO::setLucroObtido, new BigDecimal(250000.00).setScale(2, RoundingMode.HALF_UP))
+	            .with(LucroDTO::setLucroObtido, lucroObtidoService.getLucroObtido(carteira))
 	            .with(LucroDTO::setCarteira, carteira)
-	            .with(LucroDTO::setDataCadastroCarteira, LocalDate.of(2015, Month.MARCH, 7))
 	            .build();
 		
 		ApiResponse<LucroDTO> response = GenericBuilder.of(ApiResponse<LucroDTO>::new)

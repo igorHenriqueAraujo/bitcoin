@@ -11,6 +11,5 @@ public class BitcoinApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BitcoinApiApplication.class, args);
 	}
-
 }
 

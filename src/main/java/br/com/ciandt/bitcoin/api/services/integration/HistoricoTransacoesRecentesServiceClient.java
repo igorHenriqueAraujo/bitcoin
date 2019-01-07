@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import br.com.ciandt.bitcoin.api.responses.integration.HistoricoTransacoesRecenteResponse;
+import br.com.ciandt.bitcoin.api.responses.integration.HistoricoTransacoesIntegrationResponse;
 
 /**
  * Classe de serviço responsável por executar a comunicação com a API de recuperação do historico recente de transações, retorna 10 ultimas transações.
@@ -29,9 +29,9 @@ public class HistoricoTransacoesRecentesServiceClient {
 	 * Recupera historico de transações recentes da carteira de bitcoins.
 	 * @return
 	 */
-	public HistoricoTransacoesRecenteResponse getHistoricoTransacoesRecentes(String carteira) {
-		ResponseEntity<HistoricoTransacoesRecenteResponse> retorno = 
-				restTemplate.getForEntity(baseUrl + "/{carteira}/transacoesrecentes", HistoricoTransacoesRecenteResponse.class, carteira);
+	public HistoricoTransacoesIntegrationResponse getHistoricoTransacoesRecentes(String carteira) {
+		ResponseEntity<HistoricoTransacoesIntegrationResponse> retorno = 
+				restTemplate.getForEntity(baseUrl + "/{carteira}/transacoesrecentes", HistoricoTransacoesIntegrationResponse.class, carteira);
 		
 		if (retorno != null && retorno.hasBody()) {
 			return retorno.getBody();

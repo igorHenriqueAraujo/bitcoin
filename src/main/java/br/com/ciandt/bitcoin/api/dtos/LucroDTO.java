@@ -2,7 +2,6 @@ package br.com.ciandt.bitcoin.api.dtos;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 /**
  * Classe representando o objeto de resposta para o endpoint Lucro Obtido seguindo o pattern DTO (Data Transfer Object)
@@ -18,16 +17,14 @@ public class LucroDTO implements Serializable {
 	
 	private BigDecimal lucroObtido;
 	private String carteira;
-	private LocalDate dataCadastroCarteira;
 	
 	public LucroDTO() {
 		
 	}
 	
-	public LucroDTO(BigDecimal lucroObtido, String carteira, LocalDate dataCadastroCarteira) {
+	public LucroDTO(BigDecimal lucroObtido, String carteira) {
 		this.lucroObtido = lucroObtido;
 		this.carteira = carteira;
-		this.dataCadastroCarteira = dataCadastroCarteira;
 	}
 
 	public BigDecimal getLucroObtido() {
@@ -46,18 +43,9 @@ public class LucroDTO implements Serializable {
 		this.carteira = carteira;
 	}
 
-	public LocalDate getDataCadastroCarteira() {
-		return dataCadastroCarteira;
-	}
-
-	public void setDataCadastroCarteira(LocalDate dataCadastroCarteira) {
-		this.dataCadastroCarteira = dataCadastroCarteira;
-	}
-
 	@Override
 	public String toString() {
-		return "LucroDTO [lucroObtido=" + lucroObtido + ", carteira=" + carteira + ", dataCadastroCarteira="
-				+ dataCadastroCarteira + "]";
+		return "LucroDTO [lucroObtido=" + lucroObtido + ", carteira=" + carteira + "]";
 	}
 	
 

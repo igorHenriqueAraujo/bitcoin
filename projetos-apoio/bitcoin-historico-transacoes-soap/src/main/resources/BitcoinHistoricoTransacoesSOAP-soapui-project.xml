@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="f578d9d6-346b-44cf-9831-cf2c317e25ed" activeEnvironment="Default" name="BitcoinHistoricoTransacoesSOAP" soapui-version="5.4.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="8834c262-43b2-449b-8ab1-15b9893f8743" wsaVersion="NONE" name="HistoricoTransacoesPortSoap11" type="wsdl" bindingName="{http://www.ciandt.com.br/xml/carteirabitcoin}HistoricoTransacoesPortSoap11" soapVersion="1_1" anonymous="optional" definition="http://localhost:8084/service/historicoTransacoesWsdl.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8084/service/historicoTransacoesWsdl.wsdl"><con:part><con:url>http://localhost:8084/service/historicoTransacoesWsdl.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://www.ciandt.com.br/xml/carteirabitcoin" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.ciandt.com.br/xml/carteirabitcoin" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.ciandt.com.br/xml/carteirabitcoin">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://www.ciandt.com.br/xml/carteirabitcoin" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="HistoricoTransacaoRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="numeroCarteira" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="HistoricoTransacaoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="numeroCarteira" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" name="historicoTransacoes" type="tns:Transacao"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="Transacao">
+        <xs:sequence>
+          <xs:element name="valorReal" type="xs:decimal"/>
+          <xs:element name="valorBitcoin" type="xs:decimal"/>
+          <xs:element name="cotacaoTransacao" type="xs:decimal"/>
+          <xs:element name="tipoTransacao" type="tns:TipoTransacao"/>
+          <xs:element name="dataHoraTransacao" type="xs:dateTime"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="TipoTransacao">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="COMPRA"/>
+          <xs:enumeration value="VENDA"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="HistoricoTransacaoRequest">
+    <wsdl:part element="tns:HistoricoTransacaoRequest" name="HistoricoTransacaoRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="HistoricoTransacaoResponse">
+    <wsdl:part element="tns:HistoricoTransacaoResponse" name="HistoricoTransacaoResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="HistoricoTransacoesPort">
+    <wsdl:operation name="HistoricoTransacao">
+      <wsdl:input message="tns:HistoricoTransacaoRequest" name="HistoricoTransacaoRequest"></wsdl:input>
+      <wsdl:output message="tns:HistoricoTransacaoResponse" name="HistoricoTransacaoResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HistoricoTransacoesPortSoap11" type="tns:HistoricoTransacoesPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="HistoricoTransacao">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="HistoricoTransacaoRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="HistoricoTransacaoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HistoricoTransacoesPortService">
+    <wsdl:port binding="tns:HistoricoTransacoesPortSoap11" name="HistoricoTransacoesPortSoap11">
+      <soap:address location="http://localhost:8084/service/historico-transacoes"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8084/service/historico-transacoes</con:endpoint></con:endpoints><con:operation id="21e40d3d-9ce4-43e2-bb12-4b8b3c9b6275" isOneWay="false" action="" name="HistoricoTransacao" bindingOperationName="HistoricoTransacao" type="Request-Response" outputName="HistoricoTransacaoResponse" inputName="HistoricoTransacaoRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7a79b468-ede0-454b-bcc7-4f9689acba21" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8084/service/historico-transacoes</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:car="http://www.ciandt.com.br/xml/carteirabitcoin">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <car:HistoricoTransacaoRequest>\r
+         <car:numeroCarteira>9999</car:numeroCarteira>\r
+      </car:HistoricoTransacaoRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ciandt.com.br/xml/carteirabitcoin/HistoricoTransacoesPort/HistoricoTransacaoRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

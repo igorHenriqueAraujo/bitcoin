@@ -1,0 +1,38 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.ciandt.com.br/xml/carteirabitcoin"
+           targetNamespace="http://www.ciandt.com.br/xml/carteirabitcoin" elementFormDefault="qualified">
+
+    <xs:element name="HistoricoTransacaoRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="numeroCarteira" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="HistoricoTransacaoResponse">
+        <xs:complexType>
+            <xs:sequence>
+            	<xs:element name="numeroCarteira" type="xs:string"/>
+                <xs:element name="historicoTransacoes" type="tns:Transacao"  maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="Transacao">
+        <xs:sequence>
+            <xs:element name="valorReal" type="xs:decimal"/>
+            <xs:element name="valorBitcoin" type="xs:decimal"/>
+            <xs:element name="cotacaoTransacao" type="xs:decimal"/>
+            <xs:element name="tipoTransacao" type="tns:TipoTransacao"/>
+            <xs:element name="dataHoraTransacao" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="TipoTransacao">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="COMPRA"/>
+            <xs:enumeration value="VENDA"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+</xs:schema>

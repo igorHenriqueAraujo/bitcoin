@@ -2,7 +2,6 @@ package br.com.ciandt.bitcoin.api.dtos;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 /**
  * Classe representando o objeto de resposta para o endpoint Valor Investido seguindo o pattern DTO (Data Transfer Object)
@@ -18,16 +17,14 @@ public class ValorInvestidoDTO implements Serializable {
 	
 	private BigDecimal valorInvestido;
 	private String carteira;
-	private LocalDate dataCadastroCarteira;
 	
 	public ValorInvestidoDTO() {
 		
 	}
 	
-	public ValorInvestidoDTO(BigDecimal valorInvestido, String carteira, LocalDate dataCadastroCarteira) {
+	public ValorInvestidoDTO(BigDecimal valorInvestido, String carteira) {
 		this.valorInvestido = valorInvestido;
 		this.carteira = carteira;
-		this.dataCadastroCarteira = dataCadastroCarteira;
 	}
 
 	public BigDecimal getValorInvestido() {
@@ -45,19 +42,10 @@ public class ValorInvestidoDTO implements Serializable {
 	public void setCarteira(String carteira) {
 		this.carteira = carteira;
 	}
-	
-	public LocalDate getDataCadastroCarteira() {
-		return dataCadastroCarteira;
-	}
-
-	public void setDataCadastroCarteira(LocalDate dataCadastroCarteira) {
-		this.dataCadastroCarteira = dataCadastroCarteira;
-	}
 
 	@Override
 	public String toString() {
-		return "ValorInvestidoDTO [valorInvestido=" + valorInvestido + ", carteira=" + carteira
-				+ ", dataCadastroCarteira=" + dataCadastroCarteira + "]";
+		return "ValorInvestidoDTO [valorInvestido=" + valorInvestido + ", carteira=" + carteira +  "]";
 	}
 	
 	

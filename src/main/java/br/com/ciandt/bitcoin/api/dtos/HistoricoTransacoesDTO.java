@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import br.com.ciandt.bitcoin.api.dtos.enums.TipoTransacaoBitcon;
+import br.com.ciandt.bitcoin.api.dtos.enums.TipoTransacaoBitcoin;
 
 /**
  * Classe representando o objeto de resposta para o endpoint Historico de Transações realizadas de uma carteira seguindo o pattern DTO (Data Transfer Object)
@@ -22,7 +22,7 @@ public class HistoricoTransacoesDTO implements Serializable {
 	private BigDecimal valorBitcoin;
 	private BigDecimal cotacaoTransacao;
 	private LocalDateTime dataHoraTransacao;
-	private TipoTransacaoBitcon tipoTransacao;
+	private TipoTransacaoBitcoin tipoTransacao;
 	private String carteira;
 	
 	public HistoricoTransacoesDTO() {
@@ -30,7 +30,7 @@ public class HistoricoTransacoesDTO implements Serializable {
 	}
 
 	public HistoricoTransacoesDTO(BigDecimal valorReal, BigDecimal valorBitcoin, BigDecimal cotacaoTransacao,
-			LocalDateTime dataHoraTransacao, TipoTransacaoBitcon tipoTransacao, String carteira) {
+			LocalDateTime dataHoraTransacao, TipoTransacaoBitcoin tipoTransacao, String carteira) {
 		super();
 		this.valorReal = valorReal;
 		this.valorBitcoin = valorBitcoin;
@@ -72,11 +72,11 @@ public class HistoricoTransacoesDTO implements Serializable {
 		this.dataHoraTransacao = dataHoraTransacao;
 	}
 
-	public TipoTransacaoBitcon getTipoTransacao() {
+	public TipoTransacaoBitcoin getTipoTransacao() {
 		return tipoTransacao;
 	}
 
-	public void setTipoTransacao(TipoTransacaoBitcon tipoTransacao) {
+	public void setTipoTransacao(TipoTransacaoBitcoin tipoTransacao) {
 		this.tipoTransacao = tipoTransacao;
 	}
 

@@ -3,9 +3,7 @@ package br.com.ciandt.bitcoin.api.controllers;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +18,10 @@ import br.com.ciandt.bitcoin.api.dtos.HistoricoCotacaoBitconDTO;
 import br.com.ciandt.bitcoin.api.dtos.HistoricoTransacoesDTO;
 import br.com.ciandt.bitcoin.api.dtos.LucroDTO;
 import br.com.ciandt.bitcoin.api.dtos.ValorInvestidoDTO;
-import br.com.ciandt.bitcoin.api.dtos.enums.TipoTransacaoBitcon;
 import br.com.ciandt.bitcoin.api.responses.ApiResponse;
 import br.com.ciandt.bitcoin.api.services.CotacaoDiariaBitcoinService;
+import br.com.ciandt.bitcoin.api.services.TotalInvestidoService;
+import br.com.ciandt.bitcoin.api.services.TransacoesRecentesService;
 
 
 /**
@@ -38,6 +37,12 @@ public class BitcoinAPIController {
 	@Autowired
 	private CotacaoDiariaBitcoinService cotacaoDiariaBitcoinService;
 	
+	@Autowired
+	private TotalInvestidoService totalInvestidoService;
+	
+	@Autowired
+	private TransacoesRecentesService transacoesRecentesService;
+	
 	/**
 	 * Retorna o valor investido desde o momento do cadastro da carteira.
 	 * @param carteira
@@ -46,10 +51,11 @@ public class BitcoinAPIController {
 	@GetMapping(value = "/valorinvestido/{carteira}")
 	public ResponseEntity<ApiResponse<ValorInvestidoDTO>> valorInvestido(@PathVariable String carteira) {
 		
+		BigDecimal valorInvestido = totalInvestidoService.getTotalInvestido(carteira);
+		
 		ValorInvestidoDTO data  = GenericBuilder.of(ValorInvestidoDTO::new)
-	            .with(ValorInvestidoDTO::setValorInvestido, new BigDecimal(1000.00).setScale(2, RoundingMode.HALF_UP))
+	            .with(ValorInvestidoDTO::setValorInvestido, valorInvestido.setScale(2, RoundingMode.HALF_UP))
 	            .with(ValorInvestidoDTO::setCarteira, carteira)
-	            .with(ValorInvestidoDTO::setDataCadastroCarteira, LocalDate.of(2015, Month.MARCH, 7))
 	            .build();
 		
 		ApiResponse<ValorInvestidoDTO> response = GenericBuilder.of(ApiResponse<ValorInvestidoDTO>::new)
@@ -96,7 +102,7 @@ public class BitcoinAPIController {
 	}
 	
 	/**
-	 * Retorna o historico de todas as transações da Carteira.
+	 * Retorna o historico das ultimas 5 transações da Carteira.
 	 * @param carteira
 	 * @return
 	 */
@@ -104,48 +110,7 @@ public class BitcoinAPIController {
 	@GetMapping(value = "/transacoes/historico/{carteira}")
 	public ResponseEntity<ApiResponse<List>> historicoTransacoes(@PathVariable String carteira) {
 		
-		List<HistoricoTransacoesDTO> historicoData = new ArrayList<HistoricoTransacoesDTO>();
-		
-		HistoricoTransacoesDTO hist0 = GenericBuilder.of(HistoricoTransacoesDTO::new)
-				.with(HistoricoTransacoesDTO::setDataHoraTransacao, LocalDateTime.now().plusDays(-10))
-				.with(HistoricoTransacoesDTO::setCotacaoTransacao, new BigDecimal(24332.23).setScale(2, RoundingMode.HALF_UP))
-				.with(HistoricoTransacoesDTO::setTipoTransacao, TipoTransacaoBitcon.COMPRA)
-				.with(HistoricoTransacoesDTO::setValorBitcoin, new BigDecimal(249).setScale(2, RoundingMode.HALF_UP))
-				.with(HistoricoTransacoesDTO::setValorReal, new BigDecimal(6058725.27).setScale(2, RoundingMode.HALF_UP))
-				.with(HistoricoTransacoesDTO::setCarteira, carteira)
-				.build();
-		
-		HistoricoTransacoesDTO hist1 = GenericBuilder.of(HistoricoTransacoesDTO::new)
-				.with(HistoricoTransacoesDTO::setDataHoraTransacao, LocalDateTime.now().plusDays(-10))
-				.with(HistoricoTransacoesDTO::setCotacaoTransacao, new BigDecimal(24567.55).setScale(2, RoundingMode.HALF_UP))
-				.with(HistoricoTransacoesDTO::setTipoTransacao, TipoTransacaoBitcon.COMPRA)
-				.with(HistoricoTransacoesDTO::setValorBitcoin, new BigDecimal(98).setScale(2, RoundingMode.HALF_UP))
-				.with(HistoricoTransacoesDTO::setValorReal, new BigDecimal(2407619.9).setScale(2, RoundingMode.HALF_UP))
-				.with(HistoricoTransacoesDTO::setCarteira, carteira)
-				.build();
-		
-		HistoricoTransacoesDTO hist2 = GenericBuilder.of(HistoricoTransacoesDTO::new)
-				.with(HistoricoTransacoesDTO::setDataHoraTransacao, LocalDateTime.now().plusDays(-15))
-				.with(HistoricoTransacoesDTO::setCotacaoTransacao, new BigDecimal(23989.56).setScale(2, RoundingMode.HALF_UP))
-				.with(HistoricoTransacoesDTO::setTipoTransacao, TipoTransacaoBitcon.COMPRA)
-				.with(HistoricoTransacoesDTO::setValorBitcoin, new BigDecimal(653).setScale(2, RoundingMode.HALF_UP))
-				.with(HistoricoTransacoesDTO::setValorReal, new BigDecimal(15665182.68).setScale(2, RoundingMode.HALF_UP))
-				.with(HistoricoTransacoesDTO::setCarteira, carteira)
-				.build();
-		
-		HistoricoTransacoesDTO hist3 = GenericBuilder.of(HistoricoTransacoesDTO::new)
-				.with(HistoricoTransacoesDTO::setDataHoraTransacao, LocalDateTime.now().plusDays(-3))
-				.with(HistoricoTransacoesDTO::setCotacaoTransacao, new BigDecimal(25123.10).setScale(2, RoundingMode.HALF_UP))
-				.with(HistoricoTransacoesDTO::setTipoTransacao, TipoTransacaoBitcon.VENDA)
-				.with(HistoricoTransacoesDTO::setValorBitcoin, new BigDecimal(1000).setScale(2, RoundingMode.HALF_UP))
-				.with(HistoricoTransacoesDTO::setValorReal, new BigDecimal(25123100).setScale(2, RoundingMode.HALF_UP))
-				.with(HistoricoTransacoesDTO::setCarteira, carteira)
-				.build();
-		
-		historicoData.add(hist0);
-		historicoData.add(hist1);
-		historicoData.add(hist2);
-		historicoData.add(hist3);
+		List<HistoricoTransacoesDTO> historicoData = transacoesRecentesService.listUltimasTransacoes(carteira);
 		
 		ApiResponse<List> response = GenericBuilder.of(ApiResponse<List>::new)
 				.with(ApiResponse::setData, historicoData).build();

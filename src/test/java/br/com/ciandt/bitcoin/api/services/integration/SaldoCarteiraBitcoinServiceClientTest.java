@@ -23,7 +23,7 @@ public class SaldoCarteiraBitcoinServiceClientTest {
 	private ApiSaldoCarteiraClient apiSaldoCarteiraClient;
 	
 	@InjectMocks
-	private SaldoCarteiraBitcoinClientService saldoCarteiraBitcoinClientService;
+	private SaldoCarteiraBitcoinServiceClient saldoCarteiraBitcoinClientService;
 	
 	@Test
 	public void getSaldoCarteiraTest() {

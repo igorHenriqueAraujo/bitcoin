@@ -6,7 +6,7 @@ package br.com.ciandt.bitcoin.api.dtos.enums;
  * @author igorha
  *
  */
-public enum TipoTransacaoBitcon {
+public enum TipoTransacaoBitcoin {
 	VENDA,COMPRA;
 
 }

@@ -17,9 +17,9 @@ import br.com.ciandt.bitcoin.api.services.integration.saldoapi.ApiSaldoCarteiraR
  *
  */
 @Service
-public class SaldoCarteiraBitcoinClientService {
+public class SaldoCarteiraBitcoinServiceClient {
 	
-	private static final Logger log = LoggerFactory.getLogger(SaldoCarteiraBitcoinClientService.class);
+	private static final Logger log = LoggerFactory.getLogger(SaldoCarteiraBitcoinServiceClient.class);
 	
 	@Autowired
 	private ApiSaldoCarteiraClient apiSaldoCarteiraClient;

@@ -2,11 +2,16 @@
   {
     "name": "bitcoins.cotacao.base.url",
     "type": "java.lang.String",
-    "description": "URL Base para comunicação com o serviço de cotação da bitcoin"
+    "description": "URL Base para comunicacao com o servico de cotacao da bitcoin"
   },
   {
     "name": "api.saldo.carteira.url.conexao",
     "type": "java.lang.String",
-    "description": "URL Base para comunicação com o serviço de saldo da carteira de bitcoins"
+    "description": "URL Base para comunicacao com o servico de saldo da carteira de bitcoins"
+  },
+  {
+    "name": "historico.transacoes.recentes.api.base.url",
+    "type": "java.lang.String",
+    "description": "URL Base para comunicacao com o servico de historico de transacoes"
   }
 ]}

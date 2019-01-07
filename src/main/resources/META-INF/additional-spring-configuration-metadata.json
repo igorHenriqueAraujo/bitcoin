@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "bitcoins.cotacao.base.url",
+    "type": "java.lang.String",
+    "description": "URL Base para comunicação com o serviço de cotação da bitcoin"
+  },
+  {
+    "name": "api.saldo.carteira.url.conexao",
+    "type": "java.lang.String",
+    "description": "URL Base para comunicação com o serviço de saldo da carteira de bitcoins"
+  }
+]}

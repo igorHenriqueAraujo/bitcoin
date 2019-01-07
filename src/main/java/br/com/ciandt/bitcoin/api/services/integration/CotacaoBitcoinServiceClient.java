@@ -9,6 +9,11 @@ import org.springframework.web.client.RestTemplate;
 
 import br.com.ciandt.bitcoin.api.entities.enums.TipoMoedaEnum;
 
+/**
+ * Classe de serviço responsável por executar a comunicação com a API de recuperação da cotação atual da criptomoeda Bitcoin.
+ * @author igorha
+ *
+ */
 @Service
 public class CotacaoBitcoinServiceClient {
 	
@@ -22,6 +27,10 @@ public class CotacaoBitcoinServiceClient {
 		
 	}
 	
+	/**
+	 * Recupera cotação atual da criptomoeda bitcoin.
+	 * @return
+	 */
 	public BigDecimal getCotacaoBitcoin() {
 		return restTemplate.getForObject(baseUrl + "/bitcoin/{moeda}", BigDecimal.class, TipoMoedaEnum.REAL.toString());
 	}

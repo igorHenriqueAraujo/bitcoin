@@ -2,7 +2,7 @@
 // Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.11 
 // Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
-// Gerado em: 2019.01.07 às 02:29:28 PM BRST 
+// Gerado em: 2019.01.07 às 05:07:51 PM BRST 
 //
 
 
@@ -102,13 +102,5 @@ public class HistoricoTransacaoResponse {
         }
         return this.historicoTransacoes;
     }
-
-	@Override
-	public String toString() {
-		return "HistoricoTransacaoResponse [numeroCarteira=" + numeroCarteira + ", historicoTransacoes="
-				+ historicoTransacoes + "]";
-	}
-    
-    
 
 }

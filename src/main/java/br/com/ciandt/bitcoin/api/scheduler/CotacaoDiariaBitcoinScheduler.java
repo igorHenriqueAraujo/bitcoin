@@ -33,7 +33,7 @@ public class CotacaoDiariaBitcoinScheduler {
 	/**
 	 * Método iniciado pelo scheduler para executar o processo.
 	 */
-	@Scheduled(fixedRate=60000)
+	@Scheduled(fixedRate=600000)
 	public void obtemCotacaoBitcon() {
 		CotacaoBitcoinEntity saved = save(getCotacao());
 		log.info(saved.toString());	

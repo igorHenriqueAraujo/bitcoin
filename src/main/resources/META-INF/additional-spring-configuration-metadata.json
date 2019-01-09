@@ -17,6 +17,31 @@
   {
     "name": "api.historico.transacoes.soap.url.conexao",
     "type": "java.lang.String",
-    "description": "A description for 'api.historico.transacoes.soap.url.conexao'"
+    "description": "URL Base para comunicacao com o servico de historico de transacoes SOAP"
+  },
+  {
+    "name": "jwt.header",
+    "type": "java.lang.String",
+    "description": "Header de seguranca a ser informado"
+  },
+  {
+    "name": "jwt.secret",
+    "type": "java.lang.String",
+    "description": "Chave para encriptacao do token JWT"
+  },
+  {
+    "name": "jwt.expiration",
+    "type": "java.lang.String",
+    "description": "Tempo de expiracao da chave em milissegundos"
+  },
+  {
+    "name": "jwt.route.authentication.path",
+    "type": "java.lang.String",
+    "description": "Path para servico de autenticacao"
+  },
+  {
+    "name": "jwt.route.authentication.refresh",
+    "type": "java.lang.String",
+    "description": "Path para servico de atualizacao do token"
   }
 ]}

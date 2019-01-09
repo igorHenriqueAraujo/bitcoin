@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +53,7 @@ public class BitcoinAPIController {
 	 * @return
 	 */
 	@GetMapping(value = "/valorinvestido/{carteira}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<ApiResponse<ValorInvestidoDTO>> valorInvestido(@PathVariable String carteira) {
 		
 		BigDecimal valorInvestido = totalInvestidoService.getTotalInvestido(carteira);
@@ -73,6 +75,7 @@ public class BitcoinAPIController {
 	 * @return
 	 */
 	@GetMapping(value = "/lucro/{carteira}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<ApiResponse<LucroDTO>> lucro(@PathVariable String carteira) {
 		
 		LucroDTO data  = GenericBuilder.of(LucroDTO::new)
@@ -110,6 +113,7 @@ public class BitcoinAPIController {
 	 */
 	@SuppressWarnings("rawtypes")
 	@GetMapping(value = "/transacoes/historico/{carteira}")
+	@PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
 	public ResponseEntity<ApiResponse<List>> historicoTransacoes(@PathVariable String carteira) {
 		
 		List<HistoricoTransacoesDTO> historicoData = transacoesRecentesService.listUltimasTransacoes(carteira);

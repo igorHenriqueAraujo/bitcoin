@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.ciandt</groupId>
-	<artifactId>bitcoin-saldo-carteira</artifactId>
+	<artifactId>bitcoin-historico-transacoes-rest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>bitcoin-saldo-carteira</name>
+	<name>bitcoin-historico-transacoes-rest</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

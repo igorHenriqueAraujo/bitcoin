@@ -5,6 +5,27 @@
 
 Projeto demonstração de aplicação de tecnologias.
 
+## Executando para testes
+
+Para teste full das funcionalidades é necessário startar os projetos de apoio e depois startar o projeto principal.  
+Nessário ter o Java 8 instalado na máquina que vai executar.  
+Pode ser realizado através de linha de comando utilizando o plugin do spring-boot do maven como abaixo.
+
+
+	./mvnw spring-boot:run
+
+
+Não é necessário ter o maven instalado uma vez que os projetos spring-boot trazem o maven encapsulado (wrapper) para execução em qualquer máquina com JDK instalado.
+
+Ou pode ser executado, também via linha de comando, o build dos projetos com maven e posterior start utilizando java como no exemplo abaixo.
+
+
+	./mvnw clean install -DskipTests=true
+	java -jar target/<nome_do_pacote.jar>
+
+
+Os projetos de apoio se encontram na pasta projetos-apoio. Os comando devem ser executados como no exemplo dentro da pasta de cada projeto em terminais diferentes.
+
 ## PS: Travis-CI + Heroku (Integração contínua com deploy automático)
 
 Foi realizado uma nova integração do Travis-CI com o Heroku via build job para deploy automático, por isso a URL para acesso da aplicação no Heroku teve de ser alterada.

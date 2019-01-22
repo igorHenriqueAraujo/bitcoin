@@ -20,12 +20,30 @@ Não é necessário ter o maven instalado uma vez que os projetos spring-boot tr
 Ou pode ser executado, também via linha de comando, o build dos projetos com maven e posterior start utilizando java como no exemplo abaixo.
 
 
-	./mvnw clean install -DskipTests=true
+	./mvnw clean package -DskipTests=true
 	java -jar target/<nome_do_pacote.jar>
 
 
-Os projetos de apoio se encontram na pasta projetos-apoio. Os comando devem ser executados como no exemplo dentro da pasta de cada projeto em terminais diferentes.
+Os projetos de apoio se encontram na pasta projetos-apoio. Os comando devem ser executados como no exemplo dentro da pasta de cada projeto em terminais diferentes.  
 
+## PS: Docker: Executando as aplicações com docker
+
+Adicionado feature para execução de todos os projetos utilizando o docker. Para isso ainda é necessário entrar na pasta de cada projeto e executar o comando abaixo para build.
+
+
+	./mvnw clean package -DskipTests=true
+
+
+Após isso executar, dentro da pasta principal do projeto, o comando abaixo: (Assumindo que possua o docker instalado)
+
+
+	docker-compose up --build
+
+
+O docker irá construir as imagens de cada projeto de apoio e do projeto principal e em seguida irá iniciar os containers dos projetos de apoio e por ultimo da aplicação principal.  
+É possível verificar na execução com docker que a aplicação inicia com profile 'docker' para obter propriedades de conexão com os projetos de apoio que são diferentes de quando executado localmente.  
+Para isso há um novo arquivo .properties dentro da aplicação que identifica as propriedades para esse profile.
+	
 ## PS: Travis-CI + Heroku (Integração contínua com deploy automático)
 
 Foi realizado uma nova integração do Travis-CI com o Heroku via build job para deploy automático, por isso a URL para acesso da aplicação no Heroku teve de ser alterada.

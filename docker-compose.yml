@@ -1,0 +1,26 @@
+version: '3.1'
+services:
+    bitcoin-cotacao:
+        build: projetos-apoio/bitcoin-cotacao
+        ports:
+            - "8081:8081"
+    bitcoin-historico-transacoes-rest:
+        build: projetos-apoio/bitcoin-historico-transacoes-rest
+        ports:
+            - "8083:8083"           
+    bitcoin-historico-transacoes-soap:
+        build: projetos-apoio/bitcoin-historico-transacoes-soap
+        ports:
+            - "8084:8084"            
+    bitcoin-api:
+        build: .
+        ports:
+            - "8080:8080"         
+        links:
+            - bitcoin-cotacao:bitcoin-cotacao
+            - bitcoin-historico-transacoes-rest:bitcoin-historico-transacoes-rest
+            - bitcoin-historico-transacoes-soap:bitcoin-historico-transacoes-soap
+        depends_on:
+            - bitcoin-cotacao
+            - bitcoin-historico-transacoes-rest
+            - bitcoin-historico-transacoes-soap
